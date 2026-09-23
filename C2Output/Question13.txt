@@ -1,0 +1,3 @@
+﻿rox.local localhost
+dns.google dns.google
+

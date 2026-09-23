@@ -7,9 +7,9 @@ public class Question12 {
     public static void main(String[] args) {
         for (int i = 0; i < args.length; i++) {
             if (isSpammer(args[i])) {
-                System.out.println(args[i] + " is a spammer.");
+                System.out.println(args[i] + " is a known spammer.");
             } else {
-                System.out.println(args[i] + " is not a spammer.");
+                System.out.println(args[i] + " appears legitimate.");
             }
         }
     }
