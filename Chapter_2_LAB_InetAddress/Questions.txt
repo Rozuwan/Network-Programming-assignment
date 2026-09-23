@@ -1,0 +1,14 @@
+Chapter-2 : Inet Address
+1. Write a program that prints the address of your college web address.
+2. WAP that finds the address of the local machine
+3. WAP that finds the canonical hostname of a given address 
+4. WAP that finds the IP address and Host name of the local machine
+5. WAP to get IPv4 and IPv6 address of a given web address
+6. WAP for determining whether an IP address is IPv4 or IPv6
+7. WAP for testing the characteristics of an IP address (addressTypes) 
+8. WAP that compare the domain name same or not (www.nepalstock.com.np and nepalstock.com)
+9. WAP that lists all the network interfaces.
+10. WAP that use of network interfaces getter methods
+11. WAP to check remote system is reachable or not 
+12. WAP to demonstrate the spamcheck
+13. WAP to process web server logfiles
