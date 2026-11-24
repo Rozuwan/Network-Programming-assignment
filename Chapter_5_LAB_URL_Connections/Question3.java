@@ -1,33 +1,29 @@
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.UnknownHostException;
+
+import java.io.*;
+import java.net.*;
 
 public class Question3 {
     public static void main(String[] args) {
+        String resource = "https://www.oreilly.com";
+
         try {
-            URL url = new URL("https://www.oreilly.com");
-            URLConnection connection = url.openConnection();
-            connection.connect();
+            URL u = new URL(resource);
+            URLConnection uc = u.openConnection();
 
-            int n = 1;
-            while (true) {
-                String key = connection.getHeaderFieldKey(n);
-                String value = connection.getHeaderField(n);
+            for (int j = 1; ; j++) {
+                String header = uc.getHeaderField(j);
 
-                if (key == null || value == null) {
+                if (header == null) {
                     break;
                 }
 
-                System.out.println(key + ": " + value);
-                n++;
+                System.out.println(uc.getHeaderFieldKey(j) + ": " + header);
             }
-        } catch (UnknownHostException e) {
-            System.out.println("Connection failed: host not found (" + e.getMessage() + ").");
-            System.out.println("Check the URL or your network connection.");
-        } catch (IOException e) {
-            System.out.println("Connection failed: could not read the HTTP header.");
-            System.out.println("Reason: " + (e.getMessage() != null ? e.getMessage() : e.toString()));
+
+        } catch (MalformedURLException ex) {
+            System.err.println(resource + " is not a URL I understand.");
+        } catch (IOException ex) {
+            System.err.println(ex);
         }
     }
 }
