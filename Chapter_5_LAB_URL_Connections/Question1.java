@@ -1,28 +1,39 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.UnknownHostException;
+
+import java.io.*;
+import java.net.*;
 
 public class Question1 {
     public static void main(String[] args) {
         try {
-            URL url = new URL("https://www.oreilly.com");
-            URLConnection connection = url.openConnection();
-            try (BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream()))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    System.out.println(line);
+            URL u = new URL("https://www.oreilly.com");
+            HttpURLConnection uc = (HttpURLConnection) u.openConnection();
+
+            try (InputStream raw = uc.getInputStream()) {
+                printFromStream(raw);
+            } catch (IOException ex) {
+                InputStream error = uc.getErrorStream();
+                if (error != null) {
+                    printFromStream(error);
+                } else {
+                    throw ex;
                 }
             }
-        } catch (UnknownHostException e) {
-            System.out.println("Download failed: host not found (" + e.getMessage() + ").");
-            System.out.println("Check the URL or your network connection.");
-        } catch (IOException e) {
-            System.out.println("Download failed: could not download the web page.");
-            System.out.println("Reason: " + (e.getMessage() != null ? e.getMessage() : e.toString()));
+
+        } catch (MalformedURLException ex) {
+            System.err.println(ex);
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
+    }
+
+    private static void printFromStream(InputStream raw) throws IOException {
+        try (InputStream buffer = new BufferedInputStream(raw)) {
+            Reader reader = new InputStreamReader(buffer);
+            int c;
+
+            while ((c = reader.read()) != -1) {
+                System.out.print((char) c);
+            }
         }
     }
 }
